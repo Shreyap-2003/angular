@@ -1,0 +1,56 @@
+<div class="orders-page">
+
+  <h2 class="title">My Orders</h2>
+
+  <div class="toggle-container">
+    <button [class.active]="selectedTab === 'progress'" (click)="showProgressOrders()">In Progress</button>
+    <button [class.active]="selectedTab === 'completed'" (click)="showCompletedOrders()">Completed</button>
+  </div>
+
+  <!-- IN PROGRESS -->
+  <div *ngIf="selectedTab === 'progress'">
+    <div *ngFor="let order of inProgressOrders" class="order-card" (click)="viewOrder(order)">
+
+      <img [src]="order.imageUrl" class="order-image" />
+
+      <div class="order-details">
+        <h3>{{ order.itemName }}</h3>
+        <p>₹ {{ order.price }}</p>
+        <div *ngIf="!order.partnerId" class="status progress">Status: In Progress</div>
+        <p *ngIf="order.partnerPhone" class="status progress">
+          Status: Assigned <br>
+          Partner: {{ order.partnerPhone }}
+        </p>
+      </div>
+
+      <div class="order-info">
+        <p class="order-id">Order #{{ order.id }}</p>
+        <p class="order-date">{{ order.createdTime | date:'dd MMM yyyy' }}</p>
+        <!-- <span class="view-arrow">›</span> -->
+      </div>
+
+    </div>
+  </div>
+
+  <!-- COMPLETED -->
+  <div *ngIf="selectedTab === 'completed'">
+    <div *ngFor="let order of completedOrders" class="order-card" (click)="viewOrder(order)">
+
+      <img [src]="order.imageUrl" class="order-image" />
+
+      <div class="order-details">
+        <h3>{{ order.itemName }}</h3>
+        <p>₹ {{ order.price }}</p>
+        <span class="status completed">{{ order.orderStatus }}</span>
+      </div>
+
+      <div class="order-info">
+        <p class="order-id">Order #{{ order.id }}</p>
+        <p class="order-date">{{ order.createdTime | date:'dd MMM yyyy' }}</p>
+        <!-- <span class="view-arrow">›</span> -->
+      </div>
+
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,84 @@
+<h1 class="welcome">
+  Welcome Partner {{ partnerName }}!
+</h1>
+
+<div class="orders-container">
+
+  <div
+    class="order-card"
+    *ngFor="let order of orders"
+  >
+
+    <div class="top-section">
+
+      <h2>
+        Order #{{ order.id }}
+      </h2>
+
+      <span class="status">
+        {{ order.orderStatus }}
+      </span>
+
+    </div>
+
+    <div class="customer-section">
+
+      <h3>
+        👤
+        {{
+          customerMap[order.customerId]?.firstName
+        }}
+        {{
+          customerMap[order.customerId]?.lastName
+        }}
+      </h3>
+
+      <p>
+        📞
+        {{
+          customerMap[order.customerId]?.phoneNumber
+        }}
+      </p>
+
+      <p>
+        📍
+        {{
+          customerMap[order.customerId]?.address
+        }}
+      </p>
+
+    </div>
+
+    <button
+      class="accept-btn"
+      *ngIf="order.orderStatus === 'OPEN'"
+      (click)="acceptOrder(order.id)"
+    >
+      Accept Order
+    </button>
+
+    <!-- <button
+      class="accepted-btn"
+      *ngIf="order.orderStatus === 'IN_PROGRESS'"
+    >
+      Accepted
+    </button> -->
+    <!-- Complete button (only for IN_PROGRESS orders) -->
+<button
+  *ngIf="order.orderStatus === 'IN_PROGRESS'"
+  class="complete-btn"
+  (click)="completeOrder(order.id)"
+>
+  Complete
+</button>
+
+  </div>
+
+</div>
+<div
+  class="success-toast"
+  *ngIf="showToast"
+>
+  <span class="tick">✓</span>
+  {{ toastMessage }}
+</div>

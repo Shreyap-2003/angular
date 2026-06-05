@@ -1,0 +1,220 @@
+<nav class="navbar">
+
+  <div class="logo-section">
+    <img
+      src="https://img.freepik.com/premium-vector/letter-i-with-b-logo-design-line-art_733947-5193.jpg"
+      alt="Logo"
+      class="logo"
+    />
+    <h2 class="app-name" (click)="goHome()">Bling</h2>
+  </div>
+
+  <div class="right-section">
+
+    <button class="nav-signin-btn" *ngIf="!userName" (click)="openLogin()">
+      Sign In
+    </button>
+
+    <div *ngIf="userName" class="user-section">
+      <h3 class="welcome-text">Hi {{ userName }}!</h3>
+    </div>
+
+    <div class="profile-section" *ngIf="userName">
+      <div class="profile-icon" (click)="toggleDropdown()">
+  <i class="ti ti-user" style="font-size:18px;"></i>
+</div>
+
+      <div class="dropdown-menu" *ngIf="showDropdown">
+        <ng-container *ngIf="userType !== 'PARTNER'">
+          <div class="dropdown-item" (click)="goToProfile()">Profile</div>
+          <div class="dropdown-item" (click)="goToOrders()">My Orders</div>
+        </ng-container>
+        <ng-container *ngIf="userType === 'PARTNER'">
+          <div class="dropdown-item" (click)="goToProfile()">Profile</div>
+          <div class="dropdown-item" (click)="goToCompletedOrders()">Completed Orders</div>
+        </ng-container>
+        <div class="dropdown-item logout-item" (click)="logout()">Logout</div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+<!-- LOGIN POPUP -->
+<div class="overlay" *ngIf="showLogin">
+  <div class="login-panel" (click)="$event.stopPropagation()">
+
+    <div class="panel-brand">
+      <div class="panel-brand-icon">B</div>
+      <span class="panel-brand-name">Bling</span>
+    </div>
+
+    <div class="panel-head">
+      <h2>Welcome back</h2>
+      <p>Sign in to continue shopping</p>
+    </div>
+    <span *ngIf="Error" class="field-error">{{ Error }}</span>
+    <div>
+      <label class="field-label">Phone number</label>
+      <div class="inp">
+        <input type="tel" placeholder="10-digit number"
+          [(ngModel)]="phoneNumber"
+          (keypress)="allowOnlyNumbers($event)"
+          maxlength="10"
+          style="padding-left:12px;"
+        />
+      </div>
+      <span class="field-error" *ngIf="phoneError">{{ phoneError }}</span>
+    </div>
+
+    <div>
+      <label class="field-label">Password</label>
+      <div class="inp">
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          placeholder="Your password"
+          [(ngModel)]="password"
+          maxlength="15"
+          style="padding-left:12px;"
+        />
+        <span class="eye-icon" (click)="togglePassword()">
+          <svg *ngIf="!showPassword" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+            <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+            <line x1="1" y1="1" x2="23" y2="23"/>
+          </svg>
+          <svg *ngIf="showPassword" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+        </span>
+      </div>
+      <span class="field-error" *ngIf="passwordError">{{ passwordError }}</span>
+    </div>
+
+    <button class="signin-btn" (click)="login(); $event.stopPropagation()">
+      Sign in
+    </button>
+
+    <div class="divider"><hr /><span>New here?</span><hr /></div>
+
+    <p class="register-link">
+      <span (click)="openRegister()">Create an Account →</span>
+    </p>
+
+  </div>
+</div>
+
+<!-- REGISTER POPUP -->
+<div class="overlay" *ngIf="showRegister">
+  <div class="login-panel" (click)="$event.stopPropagation()">
+
+    <div class="panel-brand">
+      <div class="panel-brand-icon">B</div>
+      <span class="panel-brand-name">Bling</span>
+    </div>
+
+    <div class="panel-head">
+      <h2>Create account</h2>
+      <p>Join and start shopping in minutes</p>
+    </div>
+
+    <div class="name-row">
+      <div class="name-field">
+        <label class="field-label">First name</label>
+        <div class="inp">
+          <input type="text" placeholder="First"
+            [(ngModel)]="firstName"
+            style="padding-left:12px;"
+          />
+        </div>
+      </div>
+      <div class="name-field">
+        <label class="field-label">Last name</label>
+        <div class="inp">
+          <input type="text" placeholder="Last"
+            [(ngModel)]="lastName"
+            style="padding-left:12px;"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <label class="field-label">Phone number</label>
+      <div class="inp">
+        <input type="tel" placeholder="10-digit number"
+          [(ngModel)]="registerPhone"
+          (keypress)="allowOnlyNumbers($event)"
+          maxlength="10"
+          style="padding-left:12px;"
+        />
+      </div>
+    </div>
+
+    <div>
+      <label class="field-label">Password</label>
+      <div class="inp">
+        <input
+          [type]="showRegisterPassword ? 'text' : 'password'"
+          placeholder="Min 5 characters"
+          [(ngModel)]="registerPassword"
+          minlength="5"
+          maxlength="15"
+          style="padding-left:12px;"
+        />
+        <span class="eye-icon" (click)="toggleRegisterPassword()">
+          <svg *ngIf="!showRegisterPassword" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+            <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+            <line x1="1" y1="1" x2="23" y2="23"/>
+          </svg>
+          <svg *ngIf="showRegisterPassword" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+        </span>
+      </div>
+      <span class="field-error" *ngIf="registerPasswordError">{{ registerPasswordError }}</span>
+    </div>
+
+    <div>
+      <label class="field-label">I am a</label>
+      <div class="radio-row">
+        <div class="ropt"
+          [class.active]="registerUserType === 'CUSTOMER'"
+          (click)="registerUserType = 'CUSTOMER'"
+        >
+          Customer
+        </div>
+        <div class="ropt"
+          [class.active]="registerUserType === 'PARTNER'"
+          (click)="registerUserType = 'PARTNER'"
+        >
+          Partner
+        </div>
+      </div>
+    </div>
+
+    <span class="field-error" *ngIf="registerError">{{ registerError }}</span>
+
+    <button class="signin-btn"
+      (click)="register(); $event.stopPropagation()"
+      [disabled]="isRegistering"
+    >
+      {{ isRegistering ? 'Creating account...' : 'Create account' }}
+    </button>
+
+    <div class="divider"><hr /><span>Have an account?</span><hr /></div>
+
+    <p class="register-link">
+      <span (click)="backToLogin()">← Sign in</span>
+    </p>
+
+  </div>
+</div>
+
+<!-- SUCCESS TOAST -->
+<div class="success-toast" *ngIf="showToast">
+  ✓ Registered successfully!
+</div>

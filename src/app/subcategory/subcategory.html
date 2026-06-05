@@ -1,0 +1,47 @@
+<h1 align="center" class="subcategory-title">
+  {{ categoryName }}
+</h1>
+
+<div class="subcategory-container">
+
+  <div
+    class="subcategory-card"
+    *ngFor="let subcategory of subcategories"
+    (click)="openItems(subcategory.id, subcategory.name)"
+  >
+
+    <img
+      [src]="subcategory.imageUrl"
+      alt="subcategory image"
+      class="subcategory-image"
+    />
+
+    <h3 class="subcategory-name">
+      {{ subcategory.name }}
+    </h3>
+
+  </div>
+
+</div>
+<div class="bottom-bar" *ngIf="cartCount > 0">
+
+  <div class="bottom-left">
+    {{ cartCount }} items added
+  </div>
+
+  <div class="bottom-center">
+    Total: ₹ {{ totalAmount }}
+  </div>
+
+  <div class="bottom-right">
+
+    <button
+      class="view-cart-btn"
+      (click)="goToCart()"
+    >
+      View cart →
+    </button>
+
+  </div>
+
+</div>

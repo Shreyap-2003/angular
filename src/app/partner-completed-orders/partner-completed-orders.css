@@ -1,0 +1,61 @@
+.title {
+
+  text-align: center;
+
+  margin: 20px 0;
+}
+
+.orders-container {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fill, minmax(320px, 1fr));
+
+  gap: 20px;
+
+  padding: 20px;
+}
+
+.order-card {
+
+  background: white;
+
+  border-radius: 16px;
+
+  padding: 15px;
+
+  box-shadow:
+    0 2px 10px rgba(0,0,0,0.1);
+
+  display: flex;
+
+  gap: 15px;
+
+  align-items: center;
+}
+
+.item-image {
+
+  width: 100px;
+
+  height: 100px;
+
+  object-fit: cover;
+
+  border-radius: 12px;
+}
+
+.details h2 {
+
+  margin: 0;
+}
+
+.details p {
+  margin: 6px 0;
+  color: #555;
+}
+.green-text {
+  color: rgb(10, 169, 10) !important;; 
+  font-weight: bold;
+}
