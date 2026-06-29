@@ -1,0 +1,16 @@
+export interface SubCategoryDto {
+
+  id: number;
+
+  name: string;
+
+  description: string;
+
+  imageUrl: string;
+
+  createdDate: string;
+
+  lastModifiedDate: string;
+
+  categoryId: number;
+}

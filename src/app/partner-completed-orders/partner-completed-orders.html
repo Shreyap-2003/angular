@@ -1,0 +1,40 @@
+<h1 class="title">
+  Completed Orders
+</h1>
+
+<div class="orders-container">
+
+  <div
+    class="order-card"
+    *ngFor="let order of completedOrders"
+  >
+
+    <img
+      [src]="order.imageUrl"
+      class="item-image"
+    />
+
+    <div class="details">
+
+      <h2>
+        {{ order.itemName }}
+      </h2>
+
+      <p>
+        ₹ {{ order.price }}
+      </p>
+
+      <p>
+        Order ID:
+        #{{ order.id }}
+      </p>
+
+      <p class="green-text">
+        Completed
+      </p>
+
+    </div>
+
+  </div>
+
+</div>

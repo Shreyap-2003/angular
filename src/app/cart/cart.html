@@ -1,0 +1,95 @@
+<div class="cart-page">
+
+  <h2 class="title">🛒 My Cart</h2>
+
+  <div *ngIf="getCartItems().length === 0">
+    <h3>Your cart is empty</h3>
+  </div>
+
+  <div *ngFor="let item of getCartItems()" class="cart-item">
+
+    <img [src]="item.imageUrl" class="img" />
+
+    <div class="details">
+
+      <h3>{{ item.name }}</h3>
+
+      <p>₹ {{ item.price }}</p>
+
+      <div class="qty-box">
+  <button (click)="decrease(item)">-</button>
+  <span>{{ cart[item.id] }}</span>
+  <button (click)="increase(item)">+</button>
+  <button class="order-btn" (click)="placeOrderForItem(item); $event.stopPropagation()">
+  Order
+</button>
+</div></div>
+
+      <button class="remove" (click)="remove(item)">✕</button>
+
+  </div>
+
+</div>
+<div class="price-details" *ngIf="getCartItems().length > 0">
+
+  <div class="price-row">
+    <span>Total Price</span>
+    <span>₹ {{ totalAmount }}</span>
+  </div>
+
+  <div class="price-row">
+    <span>GST (5%)</span>
+    <span>₹ {{ gstAmount }}</span>
+  </div>
+
+  <div class="price-row final">
+    <span>Total Amount</span>
+    <span>₹ {{ finalAmount }}</span>
+  </div>
+
+</div>
+
+<!-- Bottom bar -->
+<div class="bottom-bar" *ngIf="getCartItems().length > 0">
+
+  <div>
+    <strong>{{ getCartItems().length }} Items</strong>
+  </div>
+
+  <div>
+    <strong>Total: ₹ {{ finalAmount }}</strong>
+  </div>
+
+  <!-- <div class="bottom-right">
+       <button class="home-btn" (click)="goBack()">Home</button> -->
+    <!-- <button class="checkout-btn" (click)="placeOrder()">Place Order</button>
+  </div>  -->
+
+</div>
+
+
+<!-- SUCCESS POPUP -->
+
+<div
+  class="popup-overlay"
+  *ngIf="showSuccessPopup"
+>
+
+  <div class="success-popup">
+
+    <h2>🎉 Order Placed Successfully</h2>
+
+    <p>
+      Your order has been placed successfully.
+    </p>
+
+    <button
+      class="ok-btn"
+      (click)="showSuccessPopup = false"
+    >
+      OK
+    </button>
+
+  </div>
+
+</div>

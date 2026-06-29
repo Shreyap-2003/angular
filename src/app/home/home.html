@@ -1,0 +1,60 @@
+<div class="home-content">
+  <h1>Welcome to Bling!</h1>
+</div>
+
+<!-- ACTIVE ORDERS SECTION -->
+<div class="active-orders-section" *ngIf="customerId && activeOrders.length > 0">
+<div class="active-orders-container">
+  <div class="section-header">
+    <h2 class="section-title">Your Active Orders</h2>
+    <span class="view-all" (click)="goToOrders()">View all →</span>
+  </div>
+
+  
+    <div class="active-order-card" *ngFor="let order of activeOrders" (click)="viewOrder(order)">
+
+      <div class="order-left">
+        <img [src]="order.imageUrl" alt="item image" class="order-item-img" />
+        <div class="order-item-info">
+          <span class="order-item-name">{{ order.itemName }}</span>
+          <span class="order-item-price">₹ {{ order.price }} &nbsp;·&nbsp; Order #{{ order.id }}</span>
+        </div>
+      </div>
+
+      <div class="order-right">
+
+        <!-- In Progress -->
+        <div *ngIf="!order.partnerId" class="order-status-badge progress">
+          <span class="status-dot"></span>
+          In Progress
+        </div>
+
+        <!-- Assigned -->
+        <div *ngIf="order.partnerId" class="assigned-wrap">
+          <div class="order-status-badge assigned">
+            <span class="status-dot"></span>
+            Assigned
+          </div>
+          <p class="partner-phone" *ngIf="order.partnerPhone">
+            Partner: {{ order.partnerPhone }}
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- CATEGORIES -->
+<div class="category-container">
+  <div
+    class="category-card"
+    *ngFor="let category of categories"
+    (click)="openSubcategory(category.id, category.name)"
+  >
+    <img [src]="category.imageUrl" alt="category image" class="category-image" />
+    <h3 class="category-name">{{ category.name }}</h3>
+  </div>
+</div>

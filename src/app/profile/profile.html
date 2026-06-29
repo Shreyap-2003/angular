@@ -1,0 +1,46 @@
+<div class="profile-container" *ngIf="user">
+
+  <div class="profile-card">
+
+    <div class="profile-icon">
+      <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+        <circle cx="26" cy="20" r="11" fill="#7F77DD"/>
+        <ellipse cx="26" cy="42" rx="17" ry="10" fill="#7F77DD"/>
+      </svg>
+    </div>
+
+    <h2>{{ user.firstName }} {{ user.lastName }}</h2>
+
+    <div class="field-grid">
+
+      <div class="field-box">
+        <i class="ti ti-phone"></i>
+        <span>{{ user.phoneNumber }}</span>
+      </div>
+
+      <div class="field-box">
+        <i class="ti ti-users"></i>
+        <span>{{ user.userType }}</span>
+      </div>
+
+      <div class="field-box">
+        <i class="ti ti-map-pin"></i>
+        <span>{{ user.latitude }}, {{ user.longitude }}</span>
+      </div>
+
+      <div class="field-box">
+        <i class="ti ti-building"></i>
+        <span>{{ user.address }}</span>
+      </div>
+
+      <div class="field-box status-box">
+        <i class="ti ti-shield-check"></i>
+        <span class="active-text">Active</span>
+        <span class="active-dot"></span>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
