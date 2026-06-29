@@ -29,6 +29,7 @@ export class OrderDetail implements OnInit {
   goBack() {
     this.router.navigate(['/orders']);
   }
+<<<<<<< HEAD
   
   downloadInvoice(): void {
   if (!this.order) return; // null check
@@ -46,4 +47,6 @@ export class OrderDetail implements OnInit {
       link.click();
     });
 }
+=======
+>>>>>>> 6bb2641fbd0d318e91895ad44f9512cc0918dbef
 }

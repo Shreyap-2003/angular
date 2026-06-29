@@ -8,7 +8,10 @@ import { UserDto } from '../profile/user.dto';
 import { SubCategoryDto } from '../subcategory/subcategory.dto';
 import { CreateOrderDto } from '../orders/create-order.dto';
 import { RegisterDto } from '../navbar/register.dto';
+<<<<<<< HEAD
 import { map } from 'rxjs/operators';
+=======
+>>>>>>> 6bb2641fbd0d318e91895ad44f9512cc0918dbef
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +32,11 @@ export class ApiService {
   }
 
   getOrders(): Observable<OrderDto[]> {
+<<<<<<< HEAD
     return this.http.get<OrderDto[]>('/api/orders/all');
+=======
+    return this.http.get<OrderDto[]>('/api/orders');
+>>>>>>> 6bb2641fbd0d318e91895ad44f9512cc0918dbef
   }
 
   getItems(): Observable<ItemsDto[]> {
@@ -40,6 +47,7 @@ export class ApiService {
     return this.http.get<UserDto[]>('/api/user');
   }
 
+<<<<<<< HEAD
   getPartnerCompletedOrders(partnerId: number): Observable<any[]> {
   return this.http.get<any>(`/api/orders/partner/${partnerId}/completed-orders`).pipe(
     map(response => {
@@ -50,6 +58,11 @@ export class ApiService {
     })
   );
 }
+=======
+  getPartnerCompletedOrders(partnerId: number): Observable<OrderDto[]> {
+    return this.http.get<OrderDto[]>(`/api/orders/partner/${partnerId}/completed-orders`);
+  }
+>>>>>>> 6bb2641fbd0d318e91895ad44f9512cc0918dbef
 
   getUserById(userId: number): Observable<UserDto> {
     return this.http.get<UserDto>(`/api/user/id/${userId}`);
