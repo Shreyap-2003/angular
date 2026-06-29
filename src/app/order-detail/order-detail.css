@@ -19,10 +19,7 @@
 
 .detail-card {
   background: white;
-<<<<<<< HEAD
   position: relative;
-=======
->>>>>>> 6bb2641fbd0d318e91895ad44f9512cc0918dbef
   border-radius: 20px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.10);
   padding: 40px;
@@ -107,7 +104,6 @@
   background: #edfaf4;
   color: #0F6E56;
   border: 1px solid #1D9E75;
-<<<<<<< HEAD
 }
 .invoice-btn {
   position: absolute;
@@ -132,6 +128,4 @@
 
 .invoice-btn:hover {
   background-color: #45a049;
-=======
->>>>>>> 6bb2641fbd0d318e91895ad44f9512cc0918dbef
 }
